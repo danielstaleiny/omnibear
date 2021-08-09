@@ -1,6 +1,7 @@
 import __browser__ from './browser';
 import {clearItem, focusClickedEntry, getCurrentItem} from './page/entry';
 import {cleanUrl} from './util/url';
+debugger;
 
 (function() {
   document.body.addEventListener('click', clearItem);

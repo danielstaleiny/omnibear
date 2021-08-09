@@ -1,27 +1,27 @@
-import {h, Component} from 'preact';
-import {observer, inject} from 'mobx-preact';
-import Message from './Message';
-import {openLink} from '../util/utils';
-import {MESSAGE_ERROR, MESSAGE_INFO} from '../constants';
+import { h, Component } from 'preact'
+import { observer, inject } from 'mobx-preact'
+import Message from './Message'
+import { openLink } from '../util/utils'
+import { MESSAGE_ERROR, MESSAGE_INFO } from '../constants'
 
 @inject('auth')
 @observer
 export default class LoginForm extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       domain: '',
-    };
+    }
   }
 
   componentDidMount() {
     setTimeout(() => {
-      this.input.focus();
-    }, 150);
+      this.input.focus()
+    }, 150)
   }
 
   render() {
-    const {auth} = this.props;
+    const { auth } = this.props
     return (
       <form
         className="container container--full"
@@ -46,7 +46,7 @@ export default class LoginForm extends Component {
             value={this.state.domain}
             onInput={this.handleChange}
             disabled={auth.isLoading}
-            ref={el => (this.input = el)}
+            ref={(el) => (this.input = el)}
           />
           <button
             type="submit"
@@ -75,30 +75,30 @@ export default class LoginForm extends Component {
           />
         ) : null}
       </form>
-    );
+    )
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({
       domain: e.target.value,
-    });
-  };
+    })
+  }
 
-  handleSubmit = async e => {
-    e.preventDefault();
-    const domain = this.getNormalizedDomain();
-    this.setState({domain});
-    await this.props.auth.login(domain);
-  };
+  handleSubmit = async (e) => {
+    e.preventDefault()
+    const domain = this.getNormalizedDomain()
+    this.setState({ domain })
+    await this.props.auth.login(domain)
+  }
 
   getNormalizedDomain() {
     if (
       this.state.domain.startsWith('http://') ||
       this.state.domain.startsWith('https://')
     ) {
-      return this.state.domain;
+      return this.state.domain
     } else {
-      return `https://${this.state.domain}`;
+      return `https://${this.state.domain}`
     }
   }
 
@@ -109,6 +109,6 @@ export default class LoginForm extends Component {
       'response_type=code',
       'scope=create',
       `me=${domain}`,
-    ].join('&');
+    ].join('&')
   }
 }

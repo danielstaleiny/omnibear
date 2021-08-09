@@ -1,6 +1,6 @@
-var webpack = require('webpack');
-var path = require('path');
-var copy = require('copy-webpack-plugin');
+var webpack = require('webpack')
+var path = require('path')
+var copy = require('copy-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -35,4 +35,4 @@ module.exports = {
       },
     ]),
   ],
-};
+}
